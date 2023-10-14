@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            cursor: none;
+            background: rgb(24, 24, 24);
+            height: 100vh;
+
+        }
+
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border: 1px solid white;
+            border-radius: 50%;
+            position: absolute;
+            transform:scale(0.7);
+            
+
+
+
+        }
+
+        .cursor::after {
+            content: '';
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            border: 8px solid white;
+            border-radius: 50%;
+            opacity: .5;
+            top: -8px;
+            left: -8px;
+            transform:scale(0.7);
+
+        }
+
+        .breath {
+            animation: cursorAnim1 .5s infinite alternate;
+            animation: cursorAnim2 .5s infinite alternate;
+
+        }
+
+        @keyframes cursorAnim1 {
+            from {
+                transform: scale(1);
+            }
+
+            to {
+                transform: scale(0.7);
+            }
+        }
+
+        @keyframes cursorAnim2 {
+            from {
+                transform: scale(1);
+            }
+
+            to {
+                transform: scale(0.4);
+            }
+        }
+
+
+        .expan {
+            animation: cursorAnim3 0.4s forwards;
+            border: 1px solid red;
+
+
+
+        }
+
+        @keyframes cursorAnim3 {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(3);
+                border: 5px solid red;
+            }
+
+            100% {
+                transform: scale(1);
+                border: 5px solid orange;
+                opacity: 0;
+            }
+        }
+    </style>
+
+<body>
+    <div class="cursor">
+
+    </div>
+    <script>
+        const cursor = document.querySelector('.cursor');
+        document.addEventListener('mousemove', function (e) {
+            cursor.setAttribute("style", "top :" + e.pageY + "px;  left : " + e.pageX + "px;");
+            cursor.classList.remove('breath');
+
+            setTimeout(function(){
+            cursor.classList.add('breath');
+        },10000);
+
+        });
+
+        document.addEventListener('click', function () {
+            cursor.classList.add('expan');
+            setTimeout(function () {
+                cursor.classList.remove('expan');
+            }, 400);
+        });
+     
+    </script>
+</body>
+
+</html>
